@@ -4,7 +4,7 @@ public class SurvivalGame {
 	private int n; // Number of player
 	public final int D = 10; // dimension of board
 	private final int O = 2; // Number of obstacles
-
+    private boolean bothAlive = true;
 	
 	private Object[] teleportObjects;
 
@@ -95,6 +95,14 @@ public class SurvivalGame {
 		for (int i = 0; i < n / 2; i++) {
 			teleportObjects[i] = new Human(0, 0, i, this);
 			teleportObjects[i + n / 2] = new Chark(0, 0, i, this);
+            if (i == n/2-1){
+                System.out.println("last one gets wand!");
+                //????????????????
+                Player tmp = (Human)teleportObjects[i];
+                tmp.equipment = new Wand(tmp);
+                tmp = (Chark)teleportObjects[i+n/2];
+                tmp.equipment = new Wand(tmp);
+            }
 		}
 
 		// create O obstacles. You cannot stand there
@@ -110,7 +118,7 @@ public class SurvivalGame {
 	private  void gameStart() {
 		int turn = 0;
 		int numOfAlivePlayers = n;
-		while (numOfAlivePlayers > 1) {
+		while (numOfAlivePlayers > 1 && bothAlive == true) {
 			// teleport after every N turns
 			if (turn == 0) {
 				for (Object obj : teleportObjects) {
@@ -135,12 +143,27 @@ public class SurvivalGame {
 			turn = (turn + 1) % n;
 			// count number of alive players
 			numOfAlivePlayers = 0;
-
+            boolean humanAlive = false;
+            boolean charkAlvie = false;
+            bothAlive = false;
 			for (int i = 0; i < n; i++) {
-				if (((Player) teleportObjects[i]).health > 0)
-					numOfAlivePlayers += 1;
-			}
-
+                if (teleportObjects[i] instanceof Player){
+                    if(teleportObjects[i] instanceof Human){
+                        if (((Player) teleportObjects[i]).health > 0){
+                            numOfAlivePlayers += 1;
+                            humanAlive = true;
+                        }
+                    }
+                    if(teleportObjects[i] instanceof Chark){
+                        if (((Player) teleportObjects[i]).health > 0){
+                            numOfAlivePlayers += 1;
+                            charkAlvie = true;
+                        }
+                    }
+                }
+            }
+            if (humanAlive && charkAlvie)
+                bothAlive = true;
 		}
 
 		System.out.println("Game over.");

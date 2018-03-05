@@ -10,7 +10,10 @@ public class Human extends Player {
 
 	public void teleport() {
 		super.teleport();
-		((Rifle)this.equipment).enhance();
+        if(this.equipment instanceof Rifle)
+            ((Rifle)this.equipment).enhance();
+        else if(this.equipment instanceof Wand)
+            ((Wand)this.equipment).enhance();
 	}
 	
 	public void distance(int posx, int posy)
@@ -20,10 +23,17 @@ public class Human extends Player {
 	
 	@Override
 	public void askForMove() {
-		// TODO Auto-generated method stub
-		System.out.println(String.format("You are a human (H%d) using Rifle. (Range %d, Ammo #: %d, Damage per shot: %d)", this.index, 
-				this.equipment.getRange(),((Rifle)this.equipment).getAmmo(),
-				this.equipment.getEffect() ));
+        if(this.equipment instanceof Rifle){
+            // TODO Auto-generated method stub
+            System.out.println(String.format("You are a human (H%d) using Rifle. (Range %d, Ammo #: %d, Damage per shot: %d)", this.index,
+                                            ((Weapon)this.equipment).getRange(),((Rifle)this.equipment).getAmmo(),
+                                             ((Weapon)this.equipment).getEffect() ));
+        }
+        if(this.equipment instanceof Wand){
+            System.out.println(String.format("You are a human (H%d) using Wand. (Range %d, amount per heal: %d)", this.index,
+                                             ((Wand)this.equipment).getRange(),                                             ((Wand)this.equipment).getEffect() ));
+        }
+		
 
 		super.askForMove();
 		

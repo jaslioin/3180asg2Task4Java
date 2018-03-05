@@ -40,8 +40,12 @@ public class Rifle extends Weapon {
 			Player player = owner.game.getPlayer(posx, posy);
 			if(player != null)
 			{
-				player.decreaseHealth(this.effect * ammoToUse);
-				ammo -= ammoToUse;
+                if(player.getName().charAt(0) == this.owner.getName().charAt(0)){
+                    System.out.println("You cannot attack your same race");
+                }else{
+                    player.decreaseHealth(this.effect * ammoToUse);
+                    ammo -= ammoToUse;
+                }
 			}
 		} else
 			System.out.println("Out of reach.");

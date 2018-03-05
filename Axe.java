@@ -22,7 +22,11 @@ public class Axe extends Weapon {
 
 			if(player != null ) 
 			{
-				player.decreaseHealth(this.effect);
+                if(player.getName().charAt(0) == this.owner.getName().charAt(0)){
+                    System.out.println("You cannot attack your same race");
+                }
+                else
+                    player.decreaseHealth(this.effect);
 			}
 		} else {
 			System.out.println("Out of reach.");

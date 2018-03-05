@@ -4,15 +4,17 @@ public abstract class Player {
 	private int MOBILITY;
 	protected Pos pos;
 	protected int health;
-	protected Weapon equipment;
+	//protected Weapon equipment;
+    public Object equipment;
 	protected int index;
 	protected String myString;
 	protected SurvivalGame game;
-	
+    int HEALTH_CAP;
 	public Player(int healthCap, int mob, int posx, int posy, int index, SurvivalGame game) {
 
 		this.MOBILITY = mob;
 		this.health = healthCap;
+        this.HEALTH_CAP = healthCap;
 		this.pos = new Pos(posx, posy);
 		this.index = index;
 		this.game = game;
@@ -37,6 +39,10 @@ public abstract class Player {
 
 	public void increaseHealth(int h) {
 		this.health += h;
+        if(this.health > this.HEALTH_CAP){
+            System.out.println( "reached health cap!");
+            this.health = this.HEALTH_CAP;
+        }
 	}
 
 	public void decreaseHealth(int h) {
@@ -56,7 +62,7 @@ public abstract class Player {
 
 		System.out.println("You now have following options: ");
 		System.out.println("1. Move");
-		System.out.println("2. Attack");
+		System.out.println("2. Action");
 		System.out.println("3. End tne turn");
 
 		int a = SurvivalGame.reader.nextInt();
@@ -71,17 +77,24 @@ public abstract class Player {
 			} else {
 				this.pos.setPos(posx, posy);
 				game.printBoard();
-				System.out.println("You can now \n1.attack\n2.End the turn");
+				System.out.println("You can now \n1.Action\n2.End the turn");
 				if (SurvivalGame.reader.nextInt() == 1) {
-					System.out.println("Input position to attack. (Input 'x y')");
+					System.out.println("Input position to act. (Input 'x y')");
 					int attx = SurvivalGame.reader.nextInt(), atty = SurvivalGame.reader.nextInt();
-					this.equipment.action(attx, atty);
+                    if(this.equipment instanceof Weapon)
+                        ((Weapon)this.equipment).action(attx, atty);
+                    else if (this.equipment instanceof Wand)
+                        ((Wand)this.equipment).action(attx,atty);
 				}
 			}
 		} else if (a == 2) {
-			System.out.println("Input position to attack.");
+			System.out.println("Input position to act.");
 			int attx = SurvivalGame.reader.nextInt(), atty = SurvivalGame.reader.nextInt();
-			this.equipment.action(attx, atty);
+			if(this.equipment instanceof Weapon)
+                ((Weapon)this.equipment).action(attx, atty);
+            else if (this.equipment instanceof Wand)
+                ((Wand)this.equipment).action(attx,atty);
+                
 		} else if (a == 3) {
 			return;
 		}
