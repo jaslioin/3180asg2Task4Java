@@ -1,3 +1,16 @@
+/*
+ # CSCI3180 Principles of Programming Languages
+ # --- Declaration ---
+ # I declare that the assignment here submitted is original except for source
+ # material explicitly acknowledged. I also acknowledge that I am aware of
+ # University policy and regulations on honesty in academic work, and of the
+ # disciplinary guidelines and procedures applicable to breaches of such policy and regulations, as contained in the website
+ # http://www.cuhk.edu.hk/policy/academichonesty/
+ # Assignment 2
+ # Name : Li Ho Yin
+ #Student ID : 1155077785
+ #Email Addr : hyli6@cse.cuhk.edu.hk
+ */
 public class Rifle extends Weapon {
 	private static final int RIFLE_RANGE = 4;
 	private static final int RIFLE_INIT_DAMAGE = 10;
@@ -40,7 +53,9 @@ public class Rifle extends Weapon {
 			Player player = owner.game.getPlayer(posx, posy);
 			if(player != null)
 			{
-                if(player.getName().charAt(0) == this.owner.getName().charAt(0)){
+                if(player.getName().charAt(0) == this.owner.getName().charAt(0) && (int)(player.getName().charAt(1))<58 && (int)(player.getName().charAt(0))>47){
+                    System.out.println("You cannot attack your same race");
+                }else if (player.getName().charAt(1) == this.owner.getName().charAt(0)){
                     System.out.println("You cannot attack your same race");
                 }else{
                     player.decreaseHealth(this.effect * ammoToUse);

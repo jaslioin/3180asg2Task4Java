@@ -1,3 +1,16 @@
+/*
+ # CSCI3180 Principles of Programming Languages
+ # --- Declaration ---
+ # I declare that the assignment here submitted is original except for source
+ # material explicitly acknowledged. I also acknowledge that I am aware of
+ # University policy and regulations on honesty in academic work, and of the
+ # disciplinary guidelines and procedures applicable to breaches of such policy and regulations, as contained in the website
+ # http://www.cuhk.edu.hk/policy/academichonesty/
+ # Assignment 2
+ # Name : Li Ho Yin
+ #Student ID : 1155077785
+ #Email Addr : hyli6@cse.cuhk.edu.hk
+ */
 public class Human extends Player {
 	
 	public Human(int posx, int posy, int index, SurvivalGame game) {
@@ -22,6 +35,14 @@ public class Human extends Player {
 	}
 	
 	@Override
+    public void increaseHealth(int h){
+        if (this.health <= 0){
+            this.myString = "H" + Integer.toString(this.index);
+            System.out.format("%s revived",this.myString);
+        }
+        super.increaseHealth(h);
+    }
+    @Override
 	public void askForMove() {
         if(this.equipment instanceof Rifle){
             // TODO Auto-generated method stub

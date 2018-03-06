@@ -1,3 +1,16 @@
+/*
+ # CSCI3180 Principles of Programming Languages
+ # --- Declaration ---
+ # I declare that the assignment here submitted is original except for source
+ # material explicitly acknowledged. I also acknowledge that I am aware of
+ # University policy and regulations on honesty in academic work, and of the
+ # disciplinary guidelines and procedures applicable to breaches of such policy and regulations, as contained in the website
+ # http://www.cuhk.edu.hk/policy/academichonesty/
+ # Assignment 2
+ # Name : Li Ho Yin
+ #Student ID : 1155077785
+ #Email Addr : hyli6@cse.cuhk.edu.hk
+ */
 import java.util.Scanner;
 
 public class SurvivalGame {
@@ -35,17 +48,17 @@ public class SurvivalGame {
 
 		System.out.println("|");
 
-		for (int i = 0; i < D * 5.5; i++)
+		for (int i = 0; i < D * 5.2; i++)
 			System.out.print("-");
 		System.out.println("");
 
 		for (int row = 0; row < D; row++) {
 			System.out.print(row);
 			for (int col = 0; col < D; col++)
-				System.out.print(String.format("| %s ",
+				System.out.print(String.format("| %3s",
 				printObject[row][col]));
 			System.out.println("|");
-			for (int i = 0; i < D * 5.5; i++)
+			for (int i = 0; i < D * 5.2; i++)
 				System.out.print("-");
 			System.out.println("");
 		}
